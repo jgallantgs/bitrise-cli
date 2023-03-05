@@ -16,7 +16,8 @@ sudo chmod +x /usr/local/bin/bitrise
 
 ## Auth/Preferences
 The following preferences can be set within the `settings.cfg` file.
-No quotes are needed, unless your strings contain spaces. Ex: `BITRISE_APP_SLUG=2j1k3h1289aslkdj`
+No quotes are needed, unless your strings contain spaces.
+(Ex: `BITRISE_APP_SLUG=2j1k3h1289aslkdj`)
 
 `BITRISE_API_TOKEN`  Your api token for bitrise
 
