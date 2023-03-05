@@ -65,6 +65,6 @@ No quotes are needed, unless your strings contain spaces.
 
 
 #### Other
-  `$ bitrise -h` -  Display the help message
+- `$ bitrise -h` -  Display the help message
 
-  `$ bitrise -reset:` -   Deletes the config file
+- `$ bitrise -reset:` -   Deletes the config file
