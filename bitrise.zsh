@@ -1,29 +1,27 @@
-if [ ! -f ~/.bitriseCLI ]; then
+if [ ! -f ~/bitrise-cli/settings.cfg ]; then
   echo "First run detected, opening preferences."
   # Write to config
-  echo "BITRISE_API_TOKEN=" >>~/.bitriseCLI
-  echo "BITRISE_APP_SLUG=" >>~/.bitriseCLI
-  echo "NIGHTLY_WORKFLOW_ID=" >>~/.bitriseCLI
-  echo "QA_BUILD_WORKFLOW_ID=" >>~/.bitriseCLI
-  echo "MONITOR_SLEEP=30" >>~/.bitriseCLI
-  echo "LIMIT=5" >>~/.bitriseCLI
-  echo "DEFAULT_BRANCH=develop" >>~/.bitriseCLI
+  echo "BITRISE_API_TOKEN=" >>~/bitrise-cli/settings.cfg
+  echo "BITRISE_APP_SLUG=" >>~/bitrise-cli/settings.cfg
+  echo "NIGHTLY_WORKFLOW_ID=" >>~/bitrise-cli/settings.cfg
+  echo "QA_BUILD_WORKFLOW_ID=" >>~/bitrise-cli/settings.cfg
+  echo "MONITOR_SLEEP=30" >>~/bitrise-cli/settings.cfg
+  echo "LIMIT=5" >>~/bitrise-cli/settings.cfg
+  echo "DEFAULT_BRANCH=develop" >>~/bitrise-cli/settings.cfg
   # Open the file for editing
-  open ~/.bitriseCLI
+  open ~/bitrise-cli/settings.cfg
   exit
 else
-  source ~/.bitriseCLI
+  source ~/bitrise-cli/settings.cfg
   # Check if any variables are empty
   if [ -z "$BITRISE_API_TOKEN" ] || [ -z "$BITRISE_APP_SLUG" ] || [ -z "$NIGHTLY_WORKFLOW_ID" ] || [ -z "$QA_BUILD_WORKFLOW_ID" ] || [ -z "$DEFAULT_BRANCH" ]; then
     # Open the file for editing
-    open ~/.bitriseCLI
+    open ~/bitrise-cli/settings.cfg
     exit
   fi
 fi
 
-
 function help() {
-  echo ""
   echo "Bitrise CLI"
   echo ""
   echo "If run without any parameters, the command will trigger a nightly build for the current branch."
@@ -58,13 +56,14 @@ function help() {
   echo ""
   echo "  -h, -help               Display this help message."
   echo ""
-  echo "  -reset                  Deletes the file storing keys"
+  echo "  -reset                  Deletes the settings file that stores keys"
   echo ""
   return 0
 }
 
 # Main loop that parses params
 function main() {
+  echo ""
   if [[ $# -eq 0 ]]; then
     trigger_build "$BITRISE_API_TOKEN" "$BITRISE_APP_SLUG" "$NIGHTLY_WORKFLOW_ID" "${2:-$(get_current_branch)}"
   elif [[ "$1" == "-h" || "$1" == "-help" ]]; then
@@ -94,11 +93,12 @@ function main() {
       monitor "$2"
     fi
   elif [[ "$1" == "-reset" ]]; then
-    rm -f ~/.bitriseCLI
-    echo "Deleted ~/.bitriseCLI"
+    rm -f ~/bitrise-cli/settings.cfg
+    echo "Deleted ~/bitrise-cli/settings.cfg"
   else
     help
   fi
+  echo ""
   exit
 }
 
@@ -124,7 +124,7 @@ function trigger_build() {
   if [[ "$response" == *"\"status\":\"ok\""* ]]; then
     local build_number=$(echo "$response" | sed -nE 's/.*"build_number":([0-9]+).*/\1/p')
     echo "Building '$branch' with '$workflow_id' on \033[0;32m$build_number\033[0m"
-    echo -n "Do you want to monitor the build (m), abort it (a), or exit (e)? "
+    echo "Do you want to monitor the build (m), abort it (a), or exit (e)? "
     read -r input
 
     case $input in
@@ -144,30 +144,35 @@ function trigger_build() {
 }
 
 function get() {
-  local response=$(curl -s "https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds?branch=$1&LIMIT=$LIMIT" \
+
+  local response=$(curl -s "https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds?branch=$2&limit=$LIMIT" \
     -H "Authorization: token $BITRISE_API_TOKEN")
 
   local builds=$(echo $response | grep -o '{.*}' | sed 's/},{/}\n{/g')
 
-  for build in $builds; do
+  while IFS= read -r build; do
     local build_number=$(echo $build | sed -n 's/.*"build_number":\([0-9]*\).*/\1/p')
     local triggered_at=$(echo $build | sed -n 's/.*"triggered_at":"\([^"]*\)".*/\1/p')
-    local build_status=$(echo $build | sed -n 's/.*"status":\([0-9]*\).*/\1/p' | tr -d '\n')
+    local build_status=$(echo $build | sed -n 's/.*"status":\([0-9]*\).*/\1/p')
     local time_elapsed=""
 
-    if [[ "$build_status" -eq 0 ]]; then
-      local start_seconds=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$triggered_at" +%s)
-      local current_seconds=$(date +%s)
-      local elapsed_seconds=$((current_seconds - start_seconds))
+    if [[ "$status" -eq 0 ]]; then
+      start_seconds=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$triggered_at" +%s)
+      current_seconds=$(date +%s)
+      elapsed_seconds=$((current_seconds - start_seconds))
       time_elapsed=$(printf '%dm:%ds\n' $(($elapsed_seconds / 60)) $(($elapsed_seconds % 60)))
     fi
+
+    local status_text=""
+    local status_color=""
 
     if [[ "$build_status" -ne 0 ]]; then
       echo "Build $build_number - $(print_status_text $build_status)"
     else
       echo "Build $build_number - $(print_status_text $build_status) - Time elapsed: $time_elapsed"
     fi
-  done
+  done <<<"$builds"
+
   return 0
 }
 
@@ -193,11 +198,10 @@ function monitor() {
     status_text=$(echo "$build_details" | sed -n 's/.*"status_text":"\([^"]*\)".*/\1/p')
   done
 
+  status $1
   if [ $status_code -eq 2 ]; then
-    status "$1"
     osascript -e 'tell application "Terminal" to activate'
   fi
-
   osascript -e "display notification \"Status: $status_text\" with title \"Bitrise $1\" sound name \"Blow\""
   return 0
 }
@@ -258,7 +262,6 @@ function message_helper() {
   elif [[ "$status_type" == "Success" ]]; then
     color_code="\033[0;32m"
   fi
-
   echo "${color_code}${status_type}\033[0m: ${message}"
 }
 
