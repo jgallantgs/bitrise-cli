@@ -1,18 +1,33 @@
 if [ ! -f ~/.bitriseCLI ]; then
-  echo "First run detected, opening preferences."
-  #Write to config
-  echo "BITRISE_API_TOKEN=""" >>~/.bitriseCLI
-  echo "BITRISE_APP_SLUG=""" >>~/.bitriseCLI
-  echo "NIGHTLY_WORKFLOW_ID=""" >>~/.bitriseCLI
-  echo "QA_BUILD_WORKFLOW_ID=""" >>~/.bitriseCLI
-  echo "MONITOR_SLEEP=30" >>~/.bitriseCLI
-  echo "LIMIT=5" >>~/.bitriseCLI
-  echo "DEFAULT_BRANCH="develop"" >>~/.bitriseCLI
+  echo "Incomplete config. Opening."
+  # Write to config
+  if [ -z "$BITRISE_API_TOKEN" ]; then
+    echo "BITRISE_API_TOKEN=" >> ~/.bitriseCLI
+  fi
+  if [ -z "$BITRISE_APP_SLUG" ]; then
+    echo "BITRISE_APP_SLUG=" >> ~/.bitriseCLI
+  fi
+  if [ -z "$NIGHTLY_WORKFLOW_ID" ]; then
+    echo "NIGHTLY_WORKFLOW_ID=" >> ~/.bitriseCLI
+  fi
+  if [ -z "$QA_BUILD_WORKFLOW_ID" ]; then
+    echo "QA_BUILD_WORKFLOW_ID=" >> ~/.bitriseCLI
+  fi
+  if [ -z "$MONITOR_SLEEP" ]; then
+    echo "MONITOR_SLEEP=30" >> ~/.bitriseCLI
+  fi
+  if [ -z "$LIMIT" ]; then
+    echo "LIMIT=5" >> ~/.bitriseCLI
+  fi
+  if [ -z "$DEFAULT_BRANCH" ]; then
+    echo "DEFAULT_BRANCH=develop" >> ~/.bitriseCLI
+  fi
   open ~/.bitriseCLI
   exit
 else
   source ~/.bitriseCLI
 fi
+
 
 function help() {
   echo ""
