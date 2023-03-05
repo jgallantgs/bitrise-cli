@@ -6,7 +6,7 @@ class BitriseCli < Formula
   sha256 "97fb8f81650adb6d24ab20e884dabfb608bebc0b2f0e69e462ab8ba928821fb2"
 
   def install
-    bin.install "bitrise-cli.sh" => "bitrise"
+    bin.install "bitrise-cli.zsh" => "bitrise"
   end
 
   test do
