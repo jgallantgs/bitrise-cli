@@ -15,7 +15,7 @@ sudo chmod +x /usr/local/bin/bitrise
 The script can be invoked by typing bitrise in your terminal. The command takes several optional parameters, as described below.
 
 ## Auth/Preferences
-The following preferences can be set within the `~/.bitriseCLI` file.
+The following preferences can be set within the `settings.cfg` file.
 
 - BITRISE_API_TOKEN: your api token for bitrise
 - BITRISE_APP_SLUG: your token for the bitrise app
