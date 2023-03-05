@@ -28,31 +28,41 @@ The following preferences can be set within the `~/.bitriseCLI` file.
 ## Example Usage
 
 Trigger a nightly build for the current branch
-`$ $ bitrise -nightly`
+
+`$ bitrise -nightly`
 
 Trigger a nightly build for a specific branch
+
 `$ bitrise -nightly feature/new-feature`
 
 Trigger a QA build for the current branch
+
 `$ bitrise -qa`
 
 Get build information for the last few builds of the current branch
+
 `$ bitrise -get`
 
 Get build information for the last few builds of a specific branch
+
 `$ bitrise -get feature/new-feature`
 
 Stop a build by build number
+
 `$ bitrise -stop 123456`
 
 Check the status of a build by build number
+
 `$ bitrise -status 123456`
 
 Monitor a build by build number
+
 `$ bitrise -monitor 123456`
 
 Display the help message
+
 `$ bitrise -h`
 
 Deletes the config file
+
 `$ bitrise -reset`
