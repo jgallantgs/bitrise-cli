@@ -144,7 +144,6 @@ function trigger_build() {
 }
 
 function get() {
-
   local response=$(curl -s "https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds?branch=$2&limit=$LIMIT" \
     -H "Authorization: token $BITRISE_API_TOKEN")
 
