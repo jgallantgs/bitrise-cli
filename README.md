@@ -61,7 +61,7 @@ No quotes are needed, unless your strings contain spaces.
 
 - `$ bitrise -status 123456`  -  Check the status of a build by build number
 
-- `$ bitrise -monitor 123456` -  Monitor a build by build number
+- `$ bitrise -alert 123456` -  Monitor a build by build number
 
 
 #### Other
