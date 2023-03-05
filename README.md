@@ -17,19 +17,19 @@ sudo chmod +x /usr/local/bin/bitrise
 ## Auth/Preferences
 The following preferences can be set within the `settings.cfg` file.
 
-`BITRISE_API_TOKEN`: your api token for bitrise
+`BITRISE_API_TOKEN`  Your api token for bitrise
 
-`BITRISE_APP_SLUG`: your token for the bitrise app
+`BITRISE_APP_SLUG`  Your token for the bitrise app
 
-`NIGHTLY_WORKFLOW_ID`: The ID of the workflow to use for nightly builds.
+`NIGHTLY_WORKFLOW_ID`  The ID of the workflow to use for nightly builds.
 
-`QA_BUILD_WORKFLOW_ID`: The ID of the workflow to use for QA builds.
+`QA_BUILD_WORKFLOW_ID`  The ID of the workflow to use for QA builds.
 
-`MONITOR_SLEEP`: The number of seconds to wait between monitoring checks.
+`MONITOR_SLEEP`  The number of seconds to wait between monitoring checks.
 
-`LIMIT`: The maximum number of builds to retrieve in the get command.
+`LIMIT`  The maximum number of builds to retrieve in the get command.
 
-`DEFAULT_BRANCH`: The default branch to use if no branch is specified.
+`DEFAULT_BRANCH`  The default branch to use if no branch is specified.
 
 ## Example Usage
 
