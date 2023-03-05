@@ -3,7 +3,7 @@ class BitriseCli < Formula
   homepage "https://github.com/jgallantgs/bitrise-cli"
   url "https://raw.githubusercontent.com/jgallantgs/bitrise-cli/main/bitrise-cli.sh"
   version "1.0.0" 
-  sha256 "97fb8f81650adb6d24ab20e884dabfb608bebc0b2f0e69e462ab8ba928821fb2"
+  sha256 "428fff4b59eeedd59356fea3676b08930e550dde40c05a47a02ab9d3852c7371"
 
   def install
     bin.install "bitrise-cli.sh" => "bitrise"
