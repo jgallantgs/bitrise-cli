@@ -1,6 +1,6 @@
 # Bitrise CLI
 
-This script provides a command-line interface for interacting with [Bitrise](https://bitrise.io/ "Bitrise"), the continuous integration and delivery platform. With this interface, you can trigger builds, check their status, and receive alerts when they complete, along with specific error messages in case of failure. Plus more!
+A command-line interface for interacting with [Bitrise](https://bitrise.io/ "Bitrise"), the continuous integration and delivery platform. With this interface, you can trigger builds, check their status, and receive alerts when they complete, along with specific error messages in case of failure. Plus more!
 
 
 
