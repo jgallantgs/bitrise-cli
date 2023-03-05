@@ -28,7 +28,7 @@ The script can be invoked by typing bitrise in your terminal. The command takes 
 
 - -reset: Deletes the file storing keys.
 
-##Auth/Preferences
+## Auth/Preferences
 The following preferences can be set within the `~/.bitriseCLI` file.
 
 - BITRISE_API_TOKEN: your api token for bitrise
