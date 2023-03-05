@@ -1,31 +1,24 @@
 if [ ! -f ~/.bitriseCLI ]; then
-  echo "Incomplete config. Opening."
+  echo "First run detected, opening preferences."
   # Write to config
-  if [ -z "$BITRISE_API_TOKEN" ]; then
-    echo "BITRISE_API_TOKEN=" >> ~/.bitriseCLI
-  fi
-  if [ -z "$BITRISE_APP_SLUG" ]; then
-    echo "BITRISE_APP_SLUG=" >> ~/.bitriseCLI
-  fi
-  if [ -z "$NIGHTLY_WORKFLOW_ID" ]; then
-    echo "NIGHTLY_WORKFLOW_ID=" >> ~/.bitriseCLI
-  fi
-  if [ -z "$QA_BUILD_WORKFLOW_ID" ]; then
-    echo "QA_BUILD_WORKFLOW_ID=" >> ~/.bitriseCLI
-  fi
-  if [ -z "$MONITOR_SLEEP" ]; then
-    echo "MONITOR_SLEEP=30" >> ~/.bitriseCLI
-  fi
-  if [ -z "$LIMIT" ]; then
-    echo "LIMIT=5" >> ~/.bitriseCLI
-  fi
-  if [ -z "$DEFAULT_BRANCH" ]; then
-    echo "DEFAULT_BRANCH=develop" >> ~/.bitriseCLI
-  fi
+  echo "BITRISE_API_TOKEN=" >>~/.bitriseCLI
+  echo "BITRISE_APP_SLUG=" >>~/.bitriseCLI
+  echo "NIGHTLY_WORKFLOW_ID=" >>~/.bitriseCLI
+  echo "QA_BUILD_WORKFLOW_ID=" >>~/.bitriseCLI
+  echo "MONITOR_SLEEP=30" >>~/.bitriseCLI
+  echo "LIMIT=5" >>~/.bitriseCLI
+  echo "DEFAULT_BRANCH=develop" >>~/.bitriseCLI
+  # Open the file for editing
   open ~/.bitriseCLI
   exit
 else
   source ~/.bitriseCLI
+  # Check if any variables are empty
+  if [ -z "$BITRISE_API_TOKEN" ] || [ -z "$BITRISE_APP_SLUG" ] || [ -z "$NIGHTLY_WORKFLOW_ID" ] || [ -z "$QA_BUILD_WORKFLOW_ID" ] || [ -z "$DEFAULT_BRANCH" ]; then
+    # Open the file for editing
+    open ~/.bitriseCLI
+    exit
+  fi
 fi
 
 
@@ -170,9 +163,9 @@ function get() {
     fi
 
     if [[ "$build_status" -ne 0 ]]; then
-      echo -e "Build $build_number - $(print_status_text $build_status)"
+      echo "Build $build_number - $(print_status_text $build_status)"
     else
-      echo -e "Build $build_number - $(print_status_text $build_status) - Time elapsed: $time_elapsed"
+      echo "Build $build_number - $(print_status_text $build_status) - Time elapsed: $time_elapsed"
     fi
   done
   return 0
@@ -266,7 +259,7 @@ function message_helper() {
     color_code="\033[0;32m"
   fi
 
-  echo -e "${color_code}${status_type}: ${message}\033[0m"
+  echo "${color_code}${status_type}\033[0m: ${message}"
 }
 
 function print_status_text() {
