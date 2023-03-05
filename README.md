@@ -45,6 +45,8 @@ No quotes are needed, unless your strings contain spaces.
 #### Building
 - `$ bitrise` - Trigger a nightly build for $DEFAULT_BRANCH
 
+- `$ bitrise -list` - List the last few builds based on £LIMIT
+
 - `$ bitrise -nightly` - Trigger a nightly build for the current branch
 
 - `$ bitrise -nightly feature/new-feature` - Trigger a nightly build for a specific branch
