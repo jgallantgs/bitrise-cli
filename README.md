@@ -43,13 +43,15 @@ No quotes are needed, unless your strings contain spaces.
 ## Example Usage
 
 #### Building
+- `$ bitrise` - Trigger a nightly build for $DEFAULT_BRANCH
+
 - `$ bitrise -nightly` - Trigger a nightly build for the current branch
 
 - `$ bitrise -nightly feature/new-feature` - Trigger a nightly build for a specific branch
 
 - `$ bitrise -qa` - Trigger a QA build for the current branch
 
-- `$ bitrise -nightly feature/new-feature` - Trigger a nightly build for a specific branch
+- `$ bitrise -qa feature/new-feature` - Trigger a qa build for a specific branch
 
 
 #### Working with Existing Builds
