@@ -4,7 +4,7 @@ A command-line interface for interacting with Bitrise, a continuous integration 
 
 ## Installation
 
-Wrap the file in a function call and put in your .zshrc or run the following to save as a binary.
+Run this in your terminal:
 ```sh
 sudo rm -rf bitrise-cli &&
 git clone git@github.com:jgallantgs/bitrise-cli.git &&
@@ -12,7 +12,7 @@ cd bitrise-cli &&
 sudo cp -f bitrise.zsh /usr/local/bin/bitrise &&
 sudo chmod +x /usr/local/bin/bitrise
 ```
-The script can be invoked by typing bitrise in your terminal. The command takes several optional parameters, as described below.
+(Or wrap the .zsh file in a function and put it in your .zshrc)
 
 ## Auth/Preferences
 The following preferences can be set within the `settings.cfg` file.
