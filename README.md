@@ -12,21 +12,21 @@ Usage
 The script can be invoked by typing bitrise in your terminal. The command takes several optional parameters, as described below.
 
 ## Options
-- -nightly <branch_name>: Triggers a nightly build for the specified branch. If no branch name is provided, the build is triggered for the current branch.
+`-nightly <branch_name>`: Triggers a nightly build for the specified branch. If no branch name is provided, the build is triggered for the current branch.
 
-- -qa <branch_name>: Triggers a QA build for the specified branch. If no branch name is provided, the build is triggered for the current branch.
+`-qa <branch_name>:` Triggers a QA build for the specified branch. If no branch name is provided, the build is triggered for the current branch.
 
-- -get <branch_name>: Gets build information for the last few builds of the specified branch. If no branch name is provided, the information is fetched for the current branch.
+`-get` <branch_name>: Gets build information for the last few builds of the specified branch. If no branch name is provided, the information is fetched for the current branch.
 
-- -stop <build_number>: Stops a build specified by the build number.
+`-stop` <build_number>: Stops a build specified by the build number.
 
-- -status <build_number>: Checks the status of a build specified by the build number.
+`-status` <build_number>: Checks the status of a build specified by the build number.
 
-- -monitor <build_number>: Monitors a build specified by the build number.
+`-monitor` <build_number>: Monitors a build specified by the build number.
 
-- -h, -help: Displays the help message.
+`-h, -help`: Displays the help message.
 
-- -reset: Deletes the file storing keys.
+`-reset`: Deletes the file storing keys.
 
 ## Auth/Preferences
 The following preferences can be set within the `~/.bitriseCLI` file.
@@ -42,41 +42,31 @@ The following preferences can be set within the `~/.bitriseCLI` file.
 ## Example Usage
 
 Trigger a nightly build for the current branch
-
-`$ bitrise -nightly`
+`$ $ bitrise -nightly`
 
 Trigger a nightly build for a specific branch
-
 `$ bitrise -nightly feature/new-feature`
 
 Trigger a QA build for the current branch
-
 `$ bitrise -qa`
 
 Get build information for the last few builds of the current branch
-
 `$ bitrise -get`
 
 Get build information for the last few builds of a specific branch
-
 `$ bitrise -get feature/new-feature`
 
 Stop a build by build number
-
 `$ bitrise -stop 123456`
 
 Check the status of a build by build number
-
 `$ bitrise -status 123456`
 
 Monitor a build by build number
-
 `$ bitrise -monitor 123456`
 
 Display the help message
-
 `$ bitrise -h`
 
 Deletes the config file
-
 `$ bitrise -reset`
