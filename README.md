@@ -2,6 +2,9 @@
 
 This script provides a command-line interface for interacting with Bitrise, a continuous integration and delivery platform. With this interface, you can trigger builds, check their status, and receive alerts when they complete, along with specific error messages in case of failure. Plus more!
 
+------------
+
+
 ## Installation
 
 Run this in your terminal:
@@ -15,6 +18,7 @@ sudo chmod +x /usr/local/bin/bitrise
 (Or wrap the .zsh file in a function and put it in your .zshrc)
 
 ------------
+
 
 ## Auth/Preferences
 The following preferences can be set within the `settings.cfg` file.
@@ -39,6 +43,7 @@ No quotes are needed, unless your strings contain spaces.
 - `DEFAULT_BRANCH` - The default branch to use if no branch is specified.
 
 ------------
+
 
 ## Example Usage
 
