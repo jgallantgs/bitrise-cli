@@ -1,8 +1,7 @@
 # Bitrise CLI
 
-This script provides a command-line interface for interacting with Bitrise, a continuous integration and delivery platform. With this interface, you can trigger builds, check their status, and receive alerts when they complete, along with specific error messages in case of failure. Plus more!
+This script provides a command-line interface for interacting with [Bitrise](https://bitrise.io/ "Bitrise"), the continuous integration and delivery platform. With this interface, you can trigger builds, check their status, and receive alerts when they complete, along with specific error messages in case of failure. Plus more!
 
-------------
 
 
 ## Installation
@@ -16,9 +15,6 @@ sudo cp -f bitrise.zsh /usr/local/bin/bitrise &&
 sudo chmod +x /usr/local/bin/bitrise
 ```
 (Or wrap the .zsh file in a function and put it in your .zshrc)
-
-------------
-
 
 ## Auth/Preferences
 The following preferences can be set within the `settings.cfg` file.
@@ -42,7 +38,6 @@ No quotes are needed, unless your strings contain spaces.
 
 - `DEFAULT_BRANCH` - The default branch to use if no branch is specified.
 
-------------
 
 
 ## Example Usage
@@ -56,6 +51,7 @@ No quotes are needed, unless your strings contain spaces.
 
 - `$ bitrise -nightly feature/new-feature` - Trigger a nightly build for a specific branch
 
+
 #### Working with Existing Builds
 - `$ bitrise -get` - Get build information for the last few builds of the current branch
 
@@ -67,7 +63,8 @@ No quotes are needed, unless your strings contain spaces.
 
 - `$ bitrise -monitor 123456` -  Monitor a build by build number
 
-#### Other
-- `$ bitrise -h` -  Display the help message
 
-- `$ bitrise -reset:` -   Deletes the config file
+#### Other
+  `$ bitrise -h` -  Display the help message
+
+  `$ bitrise -reset:` -   Deletes the config file
