@@ -22,39 +22,48 @@ No quotes are needed, unless your strings contain spaces.
 (Ex: `BITRISE_APP_SLUG=2j1k3h1289aslkdj`)
 
 
+------------
 
-  `BITRISE_API_TOKEN`  Your api token for bitrise
 
-  `BITRISE_APP_SLUG`  Your token for the bitrise app
+- `BITRISE_API_TOKEN` - Your api token for bitrise
 
-  `NIGHTLY_WORKFLOW_ID`  The ID of the workflow to use for nightly builds.
+- `BITRISE_APP_SLUG` - Your token for the bitrise app
 
-  `QA_BUILD_WORKFLOW_ID`  The ID of the workflow to use for QA builds.
+- `NIGHTLY_WORKFLOW_ID` - The ID of the workflow to use for nightly builds.
 
-  `MONITOR_SLEEP`  The number of seconds to wait between monitoring checks.
+- `QA_BUILD_WORKFLOW_ID` - The ID of the workflow to use for QA builds.
 
-  `LIMIT`  The maximum number of builds to retrieve in the get command.
+- `MONITOR_SLEEP` - The number of seconds to wait between monitoring checks.
 
-  `DEFAULT_BRANCH`  The default branch to use if no branch is specified.
+- `LIMIT` - The maximum number of builds to retrieve in the get command.
+
+- `DEFAULT_BRANCH` - The default branch to use if no branch is specified.
 
 ## Example Usage
 
-  `$ bitrise -nightly`  Trigger a nightly build for the current branch
+#### Building
+- `$ bitrise -nightly` - Trigger a nightly build for the current branch
 
-  `$ bitrise -nightly feature/new-feature`  Trigger a nightly build for a specific branch
+- `$ bitrise -nightly feature/new-feature` - Trigger a nightly build for a specific branch
 
-  `$ bitrise -qa`  Trigger a QA build for the current branch
+- `$ bitrise -qa` - Trigger a QA build for the current branch
 
-  `$ bitrise -get`  Get build information for the last few builds of the current branch
+- `$ bitrise -nightly feature/new-feature` - Trigger a nightly build for a specific branch
 
-  `$ bitrise -get feature/new-feature`  Get build information for the last few builds of a specific branch
+------------
+#### Working with Existing Builds
+- `$ bitrise -get` - Get build information for the last few builds of the current branch
 
-  `$ bitrise -stop 123456`  Stop a build by build number
+- `$ bitrise -get feature/new-feature` - Get build information for the last few builds of a specific branch
 
-  `$ bitrise -status 123456`  Check the status of a build by build number
+- `$ bitrise -stop 123456` - Stop a build by build number
 
-  `$ bitrise -monitor 123456`  Monitor a build by build number
+- `$ bitrise -status 123456`  -  Check the status of a build by build number
 
-  `$ bitrise -h`  Display the help message
+- `$ bitrise -monitor 123456` -  Monitor a build by build number
 
-  `$ bitrise -reset`  Deletes the config file
+------------
+#### Other
+- `$ bitrise -h` -  Display the help message
+
+- `$ bitrise -reset:` -   Deletes the config file
