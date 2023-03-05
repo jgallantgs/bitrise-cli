@@ -14,15 +14,14 @@ sudo chmod +x /usr/local/bin/bitrise
 ```
 (Or wrap the .zsh file in a function and put it in your .zshrc)
 
+------------
+
 ## Auth/Preferences
 The following preferences can be set within the `settings.cfg` file.
 
 No quotes are needed, unless your strings contain spaces.
 
 (Ex: `BITRISE_APP_SLUG=2j1k3h1289aslkdj`)
-
-
-------------
 
 
 - `BITRISE_API_TOKEN` - Your api token for bitrise
@@ -39,6 +38,8 @@ No quotes are needed, unless your strings contain spaces.
 
 - `DEFAULT_BRANCH` - The default branch to use if no branch is specified.
 
+------------
+
 ## Example Usage
 
 #### Building
@@ -50,7 +51,6 @@ No quotes are needed, unless your strings contain spaces.
 
 - `$ bitrise -nightly feature/new-feature` - Trigger a nightly build for a specific branch
 
-------------
 #### Working with Existing Builds
 - `$ bitrise -get` - Get build information for the last few builds of the current branch
 
@@ -62,7 +62,6 @@ No quotes are needed, unless your strings contain spaces.
 
 - `$ bitrise -monitor 123456` -  Monitor a build by build number
 
-------------
 #### Other
 - `$ bitrise -h` -  Display the help message
 
