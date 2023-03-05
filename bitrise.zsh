@@ -27,10 +27,14 @@ function help() {
   echo "If run without any parameters, the command will trigger a nightly build for the current branch."
   echo "If not in a current branch, it will default to develop per user preferences."
   echo ""
-  echo "Usage: build [-nightly|-qa|-get| <branch_name>]"
-  echo "Usage: build [-status|-stop|-alert <build_number>]"
+  echo "Usage: bitrise"
+  echo "Usage: bitrise [-list]"
+  echo "Usage: bitrise [-nightly|-qa|-get| <branch_name>]"
+  echo "Usage: bitrise [-status|-stop|-alert <build_number>]"
   echo "Options:"
-  echo "  -get <branch_name>     Get build info for the last few builds of the specified branch."
+  echo "  -list                  Lists the last builds based on LIMIT."
+  echo ""
+  echo "  -get <branch_name>     Gets build info for the last few specified branch."
   echo "                         If branch_name is not provided, it uses the current branch."
   echo "                         Example: build -get feature/new-feature"
   echo ""
@@ -86,6 +90,8 @@ function main() {
     fi
   elif [[ "$1" == "-get" ]]; then
     get ${2:-$(get_current_branch)}
+  elif [[ "$1" == "-list" ]]; then
+    list
   elif [[ "$1" == "-alert" ]]; then
     if [[ -z "$2" ]]; then
       message_helper "Error" "Please specify a build number"
@@ -144,34 +150,14 @@ function trigger_build() {
 }
 
 function get() {
-  local response=$(curl -s "https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds?branch=$2&limit=$LIMIT" \
-    -H "Authorization: token $BITRISE_API_TOKEN")
+  local builds=$(get_builds "branch=$1")
+  print_builds "$builds"
+  return 0
+}
 
-  local builds=$(echo $response | grep -o '{.*}' | sed 's/},{/}\n{/g')
-
-  while IFS= read -r build; do
-    local build_number=$(echo $build | sed -n 's/.*"build_number":\([0-9]*\).*/\1/p')
-    local triggered_at=$(echo $build | sed -n 's/.*"triggered_at":"\([^"]*\)".*/\1/p')
-    local build_status=$(echo $build | sed -n 's/.*"status":\([0-9]*\).*/\1/p')
-    local time_elapsed=""
-
-    if [[ "$status" -eq 0 ]]; then
-      start_seconds=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$triggered_at" +%s)
-      current_seconds=$(date +%s)
-      elapsed_seconds=$((current_seconds - start_seconds))
-      time_elapsed=$(printf '%dm:%ds\n' $(($elapsed_seconds / 60)) $(($elapsed_seconds % 60)))
-    fi
-
-    local status_text=""
-    local status_color=""
-
-    if [[ "$build_status" -ne 0 ]]; then
-      echo "Build $build_number - $(print_status_text $build_status)"
-    else
-      echo "Build $build_number - $(print_status_text $build_status) - Time elapsed: $time_elapsed"
-    fi
-  done <<<"$builds"
-
+function list() {
+  local builds=$(get_builds "")
+  print_builds "$builds"
   return 0
 }
 
@@ -306,6 +292,47 @@ function get_build_details() {
   fi
 
   echo $build_details
+}
+
+function get_builds() {
+  local response=$(curl -s "https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds?$1&limit=$LIMIT" \
+    -H "Authorization: token $BITRISE_API_TOKEN")
+
+  echo $response | grep -o '{.*}' | sed 's/},{/}\n{/g'
+}
+
+function print_builds() {
+  local builds=$1
+
+  local max_branch_length=0
+  while IFS= read -r build; do
+    local branch_name=$(echo $build | sed -n 's/.*"branch":"\([^"]*\)".*/\1/p')
+    if [[ ${#branch_name} -gt $max_branch_length ]]; then
+      max_branch_length=${#branch_name}
+    fi
+  done <<<"$builds"
+
+  while IFS= read -r build; do
+    local build_number=$(echo $build | sed -n 's/.*"build_number":\([0-9]*\).*/\1/p')
+    local branch_name=$(echo $build | sed -n 's/.*"branch":"\([^"]*\)".*/\1/p')
+    local triggered_at=$(echo $build | sed -n 's/.*"triggered_at":"\([^"]*\)".*/\1/p')
+    local build_status=$(echo $build | sed -n 's/.*"status":\([0-9]*\).*/\1/p')
+    local time_elapsed=""
+
+    if [[ "$status" -eq 0 ]]; then
+      start_seconds=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$triggered_at" +%s)
+      current_seconds=$(date +%s)
+      elapsed_seconds=$((current_seconds - start_seconds))
+      time_elapsed=$(printf '%dm:%ds' $(($elapsed_seconds / 60)) $(($elapsed_seconds % 60)))
+    fi
+
+    local status_text="$(print_status_text $build_status)"
+    if [[ "$build_status" -eq 0 ]]; then
+      printf "Build: %-6s - Branch: %- ${max_branch_length}s - %s - Time elapsed: %s\n" "$build_number" "$branch_name" "$status_text" "$time_elapsed"
+    else
+      printf "Build: %-6s - Branch: %- ${max_branch_length}s - %s\n" "$build_number" "$branch_name" "$status_text"
+    fi
+  done <<<"$builds"
 }
 
 main "$@"
