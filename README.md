@@ -14,15 +14,15 @@ The script can be invoked by typing bitrise in your terminal. The command takes 
 ## Options
 `-nightly <branch_name>`: Triggers a nightly build for the specified branch. If no branch name is provided, the build is triggered for the current branch.
 
-`-qa <branch_name>:` Triggers a QA build for the specified branch. If no branch name is provided, the build is triggered for the current branch.
+`-qa <branch_name>`: Triggers a QA build for the specified branch. If no branch name is provided, the build is triggered for the current branch.
 
-`-get` <branch_name>: Gets build information for the last few builds of the specified branch. If no branch name is provided, the information is fetched for the current branch.
+`-get <branch_name`>: Gets build information for the last few builds of the specified branch. If no branch name is provided, the information is fetched for the current branch.
 
-`-stop` <build_number>: Stops a build specified by the build number.
+`-stop <build_number>`: Stops a build specified by the build number.
 
-`-status` <build_number>: Checks the status of a build specified by the build number.
+`-status <build_number>`: Checks the status of a build specified by the build number.
 
-`-monitor` <build_number>: Monitors a build specified by the build number.
+`-monitor <build_number>`: Monitors a build specified by the build number.
 
 `-h, -help`: Displays the help message.
 
