@@ -1,6 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
-<script>new Clipboard('.copy-to-clipboard');</script>
-<style>.copy-to-clipboard {position: relative;}</style>
 # Bitrise CLI
 
 A command-line interface (CLI) for interacting with Bitrise, a continuous integration and delivery platform. The script allows you to trigger builds, monitor their progress, and check the status of previous builds, among other things.
@@ -8,18 +5,14 @@ A command-line interface (CLI) for interacting with Bitrise, a continuous integr
 ## Installation
 
 Wrap the file in a function call and put in your .zshrc or run the following to save as a binary.
-<div class="copy-to-clipboard">
-    <code>
-        sudo rm -rf bitrise-cli &&
-        git clone git@github.com:jgallantgs/bitrise-cli.git &&
-        cd bitrise-cli &&
-        sudo cp -f bitrise.zsh /usr/local/bin/bitrise &&
-        sudo chmod +x /usr/local/bin/bitrise
-    </code>
-    <button class="btn copy-btn" data-clipboard-target="#copy-to-clipboard">Copy</button>
-</div>
-
-The script can be invoked by typing `bitrise` in your terminal. The command takes several optional parameters, as described below.
+```sh
+sudo rm -rf bitrise-cli &&
+git clone git@github.com:jgallantgs/bitrise-cli.git &&
+cd bitrise-cli &&
+sudo cp -f bitrise.zsh /usr/local/bin/bitrise &&
+sudo chmod +x /usr/local/bin/bitrise
+```
+The script can be invoked by typing bitrise in your terminal. The command takes several optional parameters, as described below.
 
 ## Options
 `-nightly <branch_name>`: Triggers a nightly build for the specified branch. If no branch name is provided, the build is triggered for the current branch.
