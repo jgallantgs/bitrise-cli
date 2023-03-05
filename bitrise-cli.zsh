@@ -2,13 +2,13 @@ bitrise() {
   if [ ! -f ~/.bitriseCLI ]; then
     echo "First run detected, opening preferences."
     #Write to config
-    echo "BITRISE_API_TOKEN="token"" >> ~/.bitriseCLI
-    echo "BITRISE_APP_SLUG="slug"" >> ~/.bitriseCLI
-    echo "NIGHTLY_WORKFLOW_ID="workflow"" >> ~/.bitriseCLI
-    echo "QA_BUILD_WORKFLOW_ID="workflow"" >> ~/.bitriseCLI
-    echo "MONITOR_SLEEP=30" >> ~/.bitriseCLI
-    echo "LIMIT=5" >> ~/.bitriseCLI
-    echo "DEFAULT_BRANCH="develop"" >> ~/.bitriseCLI
+    echo "BITRISE_API_TOKEN="token"" >>~/.bitriseCLI
+    echo "BITRISE_APP_SLUG="slug"" >>~/.bitriseCLI
+    echo "NIGHTLY_WORKFLOW_ID="workflow"" >>~/.bitriseCLI
+    echo "QA_BUILD_WORKFLOW_ID="workflow"" >>~/.bitriseCLI
+    echo "MONITOR_SLEEP=30" >>~/.bitriseCLI
+    echo "LIMIT=5" >>~/.bitriseCLI
+    echo "DEFAULT_BRANCH="develop"" >>~/.bitriseCLI
     open ~/.bitriseCLI
     return 0
   else
