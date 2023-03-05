@@ -27,42 +27,22 @@ The following preferences can be set within the `settings.cfg` file.
 
 ## Example Usage
 
-Trigger a nightly build for the current branch
+`$ bitrise -nightly`  Trigger a nightly build for the current branch
 
-`$ bitrise -nightly`
+`$ bitrise -nightly feature/new-feature`  Trigger a nightly build for a specific branch
 
-Trigger a nightly build for a specific branch
+`$ bitrise -qa`  Trigger a QA build for the current branch
 
-`$ bitrise -nightly feature/new-feature`
+`$ bitrise -get`  Get build information for the last few builds of the current branch
 
-Trigger a QA build for the current branch
+`$ bitrise -get feature/new-feature`  Get build information for the last few builds of a specific branch
 
-`$ bitrise -qa`
+`$ bitrise -stop 123456`  Stop a build by build number
 
-Get build information for the last few builds of the current branch
+`$ bitrise -status 123456`  Check the status of a build by build number
 
-`$ bitrise -get`
+`$ bitrise -monitor 123456`  Monitor a build by build number
 
-Get build information for the last few builds of a specific branch
+`$ bitrise -h`  Display the help message
 
-`$ bitrise -get feature/new-feature`
-
-Stop a build by build number
-
-`$ bitrise -stop 123456`
-
-Check the status of a build by build number
-
-`$ bitrise -status 123456`
-
-Monitor a build by build number
-
-`$ bitrise -monitor 123456`
-
-Display the help message
-
-`$ bitrise -h`
-
-Deletes the config file
-
-`$ bitrise -reset`
+`$ bitrise -reset`  Deletes the config file
