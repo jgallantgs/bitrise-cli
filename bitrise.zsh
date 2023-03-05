@@ -28,7 +28,7 @@ function help() {
   echo "If not in a current branch, it will default to develop per user preferences."
   echo ""
   echo "Usage: build [-nightly|-qa|-get| <branch_name>]"
-  echo "Usage: build [-status|-stop|-monitor <build_number>]"
+  echo "Usage: build [-status|-stop|-alert <build_number>]"
   echo "Options:"
   echo "  -get <branch_name>     Get build info for the last few builds of the specified branch."
   echo "                         If branch_name is not provided, it uses the current branch."
@@ -50,13 +50,13 @@ function help() {
   echo "                         Requires a build number as the second argument."
   echo "                         Example: build -status 123456"
   echo ""
-  echo "  -monitor <build_number> Monitor a build specified by the build number."
-  echo "                           Requires a build number as the second argument."
-  echo "                           Example: build -monitor 123456"
+  echo "  -alert <build_number>  Monitor a build specified by the build number."
+  echo "                         Requires a build number as the second argument."
+  echo "                         Example: build -alert 123456"
   echo ""
-  echo "  -h, -help               Display this help message."
+  echo "  -h, -help              Display this help message."
   echo ""
-  echo "  -reset                  Deletes the settings file that stores keys"
+  echo "  -reset                 Deletes the settings file that stores keys"
   echo ""
   return 0
 }
@@ -86,11 +86,11 @@ function main() {
     fi
   elif [[ "$1" == "-get" ]]; then
     get ${2:-$(get_current_branch)}
-  elif [[ "$1" == "-monitor" ]]; then
+  elif [[ "$1" == "-alert" ]]; then
     if [[ -z "$2" ]]; then
       message_helper "Error" "Please specify a build number"
     else
-      monitor "$2"
+      alert "$2"
     fi
   elif [[ "$1" == "-reset" ]]; then
     rm -f ~/bitrise-cli/settings.cfg
@@ -124,12 +124,12 @@ function trigger_build() {
   if [[ "$response" == *"\"status\":\"ok\""* ]]; then
     local build_number=$(echo "$response" | sed -nE 's/.*"build_number":([0-9]+).*/\1/p')
     echo "Building '$branch' with '$workflow_id' on \033[0;32m$build_number\033[0m"
-    echo "Do you want to monitor the build (m), abort it (a), or exit (e)? "
+    echo "Do you want an alert for this build (y), kill it (k), or exit (n)? "
     read -r input
 
     case $input in
     "m")
-      monitor "$build_number"
+      alert "$build_number"
       ;;
     "a")
       stop "$build_number"
@@ -176,7 +176,7 @@ function get() {
 }
 
 # Build number functions
-function monitor() {
+function alert() {
   echo "Monitoring build $1..."
   echo "Press any key to stop monitoring."
 
