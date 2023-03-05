@@ -1,4 +1,4 @@
-bitrise() {
+bitrise-cli() {
   if [ ! -f ~/.bitriseCLI ]; then
     echo "First run detected, opening preferences."
     #Write to config
