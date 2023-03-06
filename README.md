@@ -1,6 +1,6 @@
 # Bitrise CLI
 
-A command-line interface for interacting with [Bitrise](https://bitrise.io/ "Bitrise"), the continuous integration and delivery platform. With this interface, you can trigger builds, check their status, and receive alerts when they complete, along with specific error messages in case of failure. Plus more!
+A command-line utility for interacting with [Bitrise](https://bitrise.io/ "Bitrise"), the continuous integration and delivery platform. With this interface, you can trigger builds, check their status, and receive alerts when they complete, along with specific error messages in case of failure. Plus more!
 
 
 
@@ -34,7 +34,7 @@ No quotes are needed, unless your strings contain spaces.
 
 - `MONITOR_SLEEP` - The number of seconds to wait between monitoring checks.
 
-- `LIMIT` - The maximum number of builds to retrieve in the get command.
+- `LIMIT` - The maximum number of builds to retrieve in the get and list commands.
 
 - `DEFAULT_BRANCH` - The default branch to use if no branch is specified.
 
@@ -55,7 +55,7 @@ No quotes are needed, unless your strings contain spaces.
 
 
 #### Working with Existing Builds
-- `$ bitrise -list` - List the last few builds based on £LIMIT
+- `$ bitrise -list` - List the last few builds based on $LIMIT
 
 - `$ bitrise -get` - Get build information for the last few builds of the current branch
 
@@ -71,4 +71,4 @@ No quotes are needed, unless your strings contain spaces.
 #### Other
 - `$ bitrise -h` -  Display the help message
 
-- `$ bitrise -reset:` -   Deletes the config file
+- `$ bitrise -reset` -   Deletes the config file
