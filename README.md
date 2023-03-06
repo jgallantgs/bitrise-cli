@@ -8,6 +8,7 @@ A command-line utility for interacting with [Bitrise](https://bitrise.io/ "Bitri
 
 Run this in your terminal:
 ```sh
+cd ~
 sudo rm -rf bitrise-cli &&
 git clone git@github.com:jgallantgs/bitrise-cli.git &&
 cd bitrise-cli &&
