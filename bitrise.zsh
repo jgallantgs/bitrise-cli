@@ -134,10 +134,10 @@ function trigger_build() {
     read -r input
 
     case $input in
-    "m")
+    "y")
       alert "$build_number"
       ;;
-    "a")
+    "k")
       stop "$build_number"
       ;;
     *)
@@ -174,7 +174,7 @@ function alert() {
     read -rsn1 -t 1 key
     if [ -n "$key" ]; then
       echo "Monitoring stopped."
-      return 1
+      return 0
     fi
 
     sleep $MONITOR_SLEEP
