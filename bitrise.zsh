@@ -1,3 +1,34 @@
+VERSION="1.1"
+
+OWNER="jgallantgs"
+REPO="bitrise-cli"
+LATEST_RELEASE=$(curl --silent https://api.github.com/repos/$OWNER/$REPO/releases/latest | grep -o '"tag_name": "[^"]\+"' | cut -d '"' -f4)
+
+if [[ "$LATEST_RELEASE" != "$VERSION" ]]; then
+read -rp "Version $LATEST_RELEASE of Bitrise-cli is available. Do you want to update? (y/n) " choice
+case "$choice" in
+    [yY]*)
+    echo "Updating to version $LATEST_RELEASE ..."
+    cd /tmp
+    curl -v --silent -L --header 'Accept: application/octet-stream' https://github.com/$OWNER/$REPO/releases/latest/download/bitrise -o bitrise
+    chmod +x bitrise
+    if sudo cp bitrise /usr/local/bin/bitrise_new; then
+        sudo chmod +x /usr/local/bin/bitrise_new
+        sudo rm /usr/local/bin/bitrise
+        sudo mv /usr/local/bin/bitrise_new /usr/local/bin/bitrise
+        echo "Update complete!"
+    else
+        echo "Update failed - could not copy new version to /usr/local/bin"
+    fi
+    ;;
+    *)
+    echo "Skipping update."
+    ;;
+esac
+else
+echo "You are using the latest version: $VERSION"
+fi
+
 if [ ! -f ~/bitrise-cli/settings.cfg ]; then
   echo "First run detected, opening preferences."
   # Write to config
