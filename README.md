@@ -24,7 +24,7 @@ No quotes are needed, unless your strings contain spaces.
 (Ex: `BITRISE_APP_SLUG=2j1k3h1289aslkdj`)
 
 
-- `BITRISE_API_TOKEN` - Your api token for bitrise. Can be gotten from post request when triggering a build on the web client. Token doesn't expire.
+- `BITRISE_API_TOKEN` - Your api token for bitrise. Can be obtained from post request when triggering a build on the web client. Token doesn't expire.
 
 - `BITRISE_APP_SLUG` - Your token for the bitrise app
 
