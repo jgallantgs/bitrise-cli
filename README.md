@@ -24,7 +24,7 @@ No quotes are needed, unless your strings contain spaces.
 (Ex: `BITRISE_APP_SLUG=2j1k3h1289aslkdj`)
 
 
-- `BITRISE_API_TOKEN` - Your api token for bitrise
+- `BITRISE_API_TOKEN` - Your api token for bitrise. Can be gotten from post request when triggering a build on the web client. Token doesn't expire.
 
 - `BITRISE_APP_SLUG` - Your token for the bitrise app
 
@@ -56,10 +56,6 @@ No quotes are needed, unless your strings contain spaces.
 
 #### Working with Existing Builds
 - `$ bitrise -list` - List the last few builds based on $LIMIT
-
-- `$ bitrise -get` - Get build information for the last few builds of the current branch
-
-- `$ bitrise -get feature/new-feature` - Get build information for the last few builds of a specific branch
 
 - `$ bitrise -stop 123456` - Stop a build by build number
 
